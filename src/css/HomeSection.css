@@ -1,0 +1,10 @@
+@media (max-width: 950px) {
+    .HomeSectionDiv{
+        flex-direction: column !important;
+        padding-top: 160px !important;
+    }   
+    
+    .css-1b8lrsf{
+        margin-top: 0px !important;
+    }
+}
