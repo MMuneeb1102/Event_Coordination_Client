@@ -1,0 +1,14 @@
+.heading-strip {
+  background-color: white;
+  padding: 15px 30px;
+  border-bottom: 1px solid #ddd;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card-main-grid {
+  display: flex;
+  justify-content: space-evenly;
+}
