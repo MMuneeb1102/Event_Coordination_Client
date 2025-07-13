@@ -10,7 +10,6 @@ import EventDetails from "./pages/EventDetails";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 function App() {
-
  
   return (
     <Router>

@@ -3,6 +3,7 @@ import profileImg from "../../assets/user.png";
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie'
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const ProfileDropDown = () => {
 const navigate = useNavigate()
   const logout = ()=>{
