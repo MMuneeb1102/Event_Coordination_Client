@@ -1,7 +1,6 @@
 import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
 import Cookies from 'js-cookie';
-// const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
-const apiUrl = 'http://localhost:3000'
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 export const signup = createAsyncThunk("auth/signup", async (data, { rejectWithValue })=>{
     try {

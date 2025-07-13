@@ -19,7 +19,7 @@
 
    If your backend is running on a different URL, create a `.env` file in the root of the frontend folder and add:
 
-   REACT_APP_API_URL=http://localhost:3000
+   VITE_REACT_APP_API_URL=http://localhost:3000
 
 5. **Start the development server**
 

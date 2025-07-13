@@ -2,12 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 // Async thunk for creating an event
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const token = Cookies.get('token')
 export const createEvent = createAsyncThunk(
   'event/createEvent',
   async (eventData, thunkAPI) => {
     try {
-      const response = await axios.post('http://localhost:3000/event/create-event', eventData, {
+      const response = await axios.post(`${apiUrl}/event/create-event`, eventData, {
         withCredentials: true, // send cookies if needed
         headers: {
             'authorization': `Bearer ${token}`
@@ -25,7 +26,7 @@ export const getAllEvents = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
         const token = Cookies.get('token')
-      const response = await axios.get('http://localhost:3000/event/getall', {
+      const response = await axios.get(`${apiUrl}/event/getall`, {
         withCredentials: true,
         headers: {
             'authorization': `Bearer ${token}`
@@ -43,7 +44,7 @@ export const getEventById = createAsyncThunk(
   async (eventId, thunkAPI) => {
     try {
         const token = Cookies.get('token')
-      const response = await axios.get(`http://localhost:3000/event/get-event/${eventId}`, {
+      const response = await axios.get(`${apiUrl}/event/get-event/${eventId}`, {
         withCredentials: true,
         headers: {
             'authorization': `Bearer ${token}`

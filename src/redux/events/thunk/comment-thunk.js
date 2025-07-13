@@ -10,7 +10,7 @@ export const createComment = createAsyncThunk(
     try {
       console.log(comment)
       const response = await axios.post(
-        `http://localhost:3000/event/add-comment/${eventId}`,
+        `${apiUrl}/event/add-comment/${eventId}`,
         {comment: comment},
         {
           headers: {
@@ -36,7 +36,7 @@ export const getAllCommentsByEventId = createAsyncThunk(
   async (eventId, { rejectWithValue }) => {
     // console.log(eventId)
     try {
-      const response = await axios.get(`http://localhost:3000/event/comments/getall/${eventId}`,
+      const response = await axios.get(`${apiUrl}/event/comments/getall/${eventId}`,
         {
           headers: {
             'Content-Type': 'application/json',
