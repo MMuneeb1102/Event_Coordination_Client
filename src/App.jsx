@@ -7,8 +7,11 @@ import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import EventDetails from "./pages/EventDetails";
-
+import { useEffect, useState } from "react";
+import Cookies from 'js-cookie'
 function App() {
+
+ 
   return (
     <Router>
       <Navbar />
@@ -17,7 +20,7 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/events" element={<Events />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/event" element={<EventDetails />} />
+        <Route path="/event/:id" element={<EventDetails />} />
       </Routes>
       <Footer />
     </Router>

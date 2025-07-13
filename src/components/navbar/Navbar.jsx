@@ -31,7 +31,7 @@ export default function Navbar() {
   }
 
   const navigation = [
-    { name: "Dashboard", href: "#", current: true },
+    { name: "Home", href: "/", current: true },
     { name: "About", href: "#", current: false },
     { name: "Contact us", href: "#", current: false },
     ...(token ? [{ name: "Events", href: "/events", current: false }] : []),

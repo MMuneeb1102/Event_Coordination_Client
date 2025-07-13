@@ -9,9 +9,10 @@ import { getAllEvents } from '../redux/events/thunk/event-thunk';
 import { useEffect } from 'react';
 import LoginButton from '../components/buttons/LoginButton';
 import EventModal from '../components/Events/EventModal';
+import FormLoader from '../components/loaders/FormLoader';
 const Events = () => {
     const dispatch = useDispatch()
-     const { events, isLoading } = useSelector((state) => state.events);
+     const { events, isLoading, isevPageLoading } = useSelector((state) => state.events);
     useEffect(()=>{
         dispatch(getAllEvents())
     },[])
@@ -25,6 +26,8 @@ const Events = () => {
         const handleClose = () => {
             setOpen(false);
         };
+
+        if(isevPageLoading) return <FormLoader/>
 
     return (
         <>
@@ -43,6 +46,7 @@ const Events = () => {
                                 date={event.eventDate}
                                 time={event.time}
                                 location={event.location}
+                                eventId={event._id}
                                 // participants={event.participants}
                             />
                         </Grid>

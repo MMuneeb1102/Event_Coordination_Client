@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateField, resetEventState, updateEvents } from '../../redux/events/slice/event-slice';
 import { createEvent } from '../../redux/events/thunk/event-thunk';
+import FormLoader from '../loaders/FormLoader';
 export default function FormDialog({ open, setOpen }) {
     const dispatch = useDispatch();
     const { title, description, date, time, location, isLoading } = useSelector((state) => state.events);
@@ -88,6 +89,7 @@ export default function FormDialog({ open, setOpen }) {
                             <Button onClick={handleClose}>Cancel</Button>
                             <Button type="submit">Create</Button>
                         </DialogActions>
+                        {isLoading && <FormLoader/>}
                     </form>
                 </DialogContent>
             </Dialog>

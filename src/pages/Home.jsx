@@ -4,7 +4,6 @@ import Navbar from "../components/navbar/Navbar";
 const Home = () => {
   return (
     <div>
-      
       <HomeMainSection />
     </div>
   );

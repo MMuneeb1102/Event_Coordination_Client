@@ -14,6 +14,7 @@ import HomeImage from "../../assets/HomescreenImage.png";
 import HeadingText from "./HeadingText";
 import CustomButton from "../buttons/CustomButton";
 import "../../css/HomeSection.css";
+import Cookies from 'js-cookie'
 
 const StyledBox = styled("div")(({ theme }) => ({
   alignSelf: "center",
@@ -36,13 +37,19 @@ const StyledBox = styled("div")(({ theme }) => ({
   },
 }));
 
-
 export default function HomeMainSection() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/signup');
+    if(!token){
+      navigate('/signup'); 
+    }
+    else{
+      navigate('/events')
+    }
   };
+
+  const token = Cookies.get('token')
 
   return (
     <Box
@@ -122,7 +129,7 @@ export default function HomeMainSection() {
             useFlexGap
             sx={{ pt: 2, width: { xs: "100%", sm: "350px" } }}
           >
-            <CustomButton btnText="Join Now" handleClick={handleClick} />
+            <CustomButton btnText={token? "Events" : "Join Now"} handleClick={handleClick} />
           </Stack>
           <Typography
             variant="caption"

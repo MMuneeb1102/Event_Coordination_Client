@@ -1,15 +1,17 @@
 import React from 'react';
 import '../../css/EventCard.css';
-
-const EventCard = ({ title, date, time, location }) => {
+import { useNavigate } from 'react-router-dom';
+const EventCard = ({ title, date, time, location, eventId }) => {
+    const navigate = useNavigate()
     return (
         <div className="card-new1">
             <div className="img-new">
                 <div className="save-new">
                     {/* SVG Save Icon */}
-                    <svg className="svg-new" width="683" height="683" viewBox="0 0 683 683" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* <svg className="svg-new" width="683" height="683" viewBox="0 0 683 683" fill="none" xmlns="http://www.w3.org/2000/svg"> */}
                         {/* ... SVG content ... */}
-                    </svg>
+                    {/* </svg> */}
+                    <button onClick={()=>{navigate(`/event/${eventId}`)}}>View Event</button>
                 </div>
             </div>
 
