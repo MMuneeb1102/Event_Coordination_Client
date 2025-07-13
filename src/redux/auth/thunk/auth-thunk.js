@@ -33,6 +33,7 @@ export const signin = createAsyncThunk("auth/signin", async (data, { rejectWithV
     try {
         const response = await fetch(`${apiUrl}/auth/signin`, {
             method: 'POST',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             }, 
