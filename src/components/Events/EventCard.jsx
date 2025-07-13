@@ -1,9 +1,9 @@
 import React from 'react';
 import '../../css/EventCard.css';
 
-const EventCard = ({ title, date, time, location, participants }) => {
+const EventCard = ({ title, date, time, location }) => {
     return (
-        <div className="card-new">
+        <div className="card-new1">
             <div className="img-new">
                 <div className="save-new">
                     {/* SVG Save Icon */}
@@ -17,7 +17,7 @@ const EventCard = ({ title, date, time, location, participants }) => {
                 <p className="h3-new">{title}</p>
                 <p className="p-new">{date} • {time}</p>
                 <p className="p-new">📍 {location}</p>
-                <p className="p-new">👥 {participants.length} Participants</p>
+                {/* <p className="p-new">👥 {participants.length} Participants</p> */}
             </div>
         </div>
     );

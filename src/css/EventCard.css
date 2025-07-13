@@ -1,4 +1,4 @@
-.card-new {
+.card-new1 {
   width: 252px;
   height: auto;
   background: white;
@@ -81,7 +81,7 @@
   color: #9198e5;
 }
 
-.card-new:hover {
+.card-new1:hover {
   cursor: pointer;
   box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
 }

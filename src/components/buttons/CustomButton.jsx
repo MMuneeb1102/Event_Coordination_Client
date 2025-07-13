@@ -1,7 +1,10 @@
 import React from "react";
 import "../../css/CustomButton.css";
-const CustomButton = ({ btnText }) => {
-  return <button className="btn">{btnText}</button>;
+import { useNavigate } from "react-router-dom";
+
+const CustomButton = ({ btnText, handleClick }) => {
+  const navigate = useNavigate()
+  return <button className="custbtn e" onClick={handleClick}>{btnText}</button>;
 };
 
 export default CustomButton;

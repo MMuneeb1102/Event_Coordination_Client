@@ -1,16 +1,16 @@
 /* From Uiverse.io by kennyotsu */ 
-.card {
+.card-new {
   /* color used to softly clip top and bottom of the .words container */
   
   background-color: var(--bg-color);
   padding: 1rem 2rem;
   border-radius: 1.25rem;
 }
-.loader {
+.loader-new {
   color: rgb(60 60 63);
   font-family: "Poppins", sans-serif;
   font-weight: 500;
-  font-size: 25px;
+  font-size: 25px !important;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   height: 40px;
@@ -19,6 +19,11 @@
   display: -ms-flexbox;
   display: flex;
   border-radius: 8px;
+}
+
+.Easily-heading{
+  font-size: 25px !important;
+  margin-bottom: 0px !important;
 }
 
 .words {

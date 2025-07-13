@@ -1,5 +1,5 @@
 /* From Uiverse.io by alexreyes091 */ 
-.btn {
+.custbtn {
   padding: 1rem 2rem;
   font-weight: 700;
   background: #624bb9;
@@ -15,7 +15,7 @@
     box-shadow;
 }
 
-.btn:hover {
+.custbtn:hover {
   border-top: 2px solid blueviolet;
   border-left: 2px solid blueviolet;
   border-bottom: 2px solid rgb(238, 103, 238);

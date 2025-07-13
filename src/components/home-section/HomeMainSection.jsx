@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -30,12 +31,19 @@ const StyledBox = styled("div")(({ theme }) => ({
   backgroundPosition: "center",
   backgroundSize: "contain",
   [theme.breakpoints.up("sm")]: {
-    marginTop: theme.spacing(10),
+    // marginTop: theme.spacing(10),
     height: 550,
   },
 }));
 
+
 export default function HomeMainSection() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/signup');
+  };
+
   return (
     <Box
       id="hero"
@@ -114,7 +122,7 @@ export default function HomeMainSection() {
             useFlexGap
             sx={{ pt: 2, width: { xs: "100%", sm: "350px" } }}
           >
-            <CustomButton btnText="Join Now" />
+            <CustomButton btnText="Join Now" handleClick={handleClick} />
           </Stack>
           <Typography
             variant="caption"
@@ -125,7 +133,6 @@ export default function HomeMainSection() {
             <Link href="#" color="primary">
               Terms & Conditions
             </Link>
-            .
           </Typography>
         </Stack>
         <StyledBox id="image" />

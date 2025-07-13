@@ -8,18 +8,34 @@ import ProfileDropDown from "./ProfileDropDown";
 import MobileDropDown from "./MobileDropDown";
 import NavItems from "./NavItems";
 import logo from "../../assets/logo.png";
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "About", href: "#", current: false },
-  { name: "Contact us", href: "#", current: false },
-  { name: "Events", href: "#", current: false },
-];
+import Cookies from 'js-cookie';
+import CustomButton from "../buttons/CustomButton";
+import LoginButton from "../buttons/LoginButton";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const [token, setToken] = useState(null);
+  const navigate = useNavigate()
+  useEffect(() => {
+    const t = Cookies.get('token');
+    setToken(t);
+  }, []);
+
+  const handleNav = () =>{
+    navigate('/signin')
+  }
+
+  const navigation = [
+    { name: "Dashboard", href: "#", current: true },
+    { name: "About", href: "#", current: false },
+    { name: "Contact us", href: "#", current: false },
+    ...(token ? [{ name: "Events", href: "/events", current: false }] : []),
+  ];
   return (
     <Disclosure
       as="nav"
@@ -51,8 +67,9 @@ export default function Navbar() {
 
             <NavItems navigation={navigation} classNames={classNames} />
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          {token ? <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button
+              style={{ background: 'none' }}
               type="button"
               className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
             >
@@ -62,7 +79,11 @@ export default function Navbar() {
             </button>
 
             <ProfileDropDown />
-          </div>
+          </div> :
+            <div>
+              <LoginButton btnText="Login" onClickFunction={handleNav} />
+            </div>
+          }
         </div>
       </div>
 
