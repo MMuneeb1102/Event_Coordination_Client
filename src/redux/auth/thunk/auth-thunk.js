@@ -9,7 +9,7 @@ export const signup = createAsyncThunk("auth/signup", async (data, { rejectWithV
             headers: {
                 'Content-Type': 'application/json'
             }, 
-            credentials: 'include',
+            // credentials: 'include',
             body: JSON.stringify(data)
         })
 
@@ -33,11 +33,10 @@ export const signin = createAsyncThunk("auth/signin", async (data, { rejectWithV
     try {
         const response = await fetch(`${apiUrl}/auth/signin`, {
             method: 'POST',
-            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             }, 
-            credentials: 'include',
+            // credentials: 'include',
             body: JSON.stringify(data)
         })
 
@@ -47,10 +46,11 @@ export const signin = createAsyncThunk("auth/signin", async (data, { rejectWithV
             return rejectWithValue(responseData?.message || "Signin failed");
         }
 
-        if (responseData.token) {
-            Cookies.set("token", responseData.token, { expires: 1 });
-            
-        }
+        Cookies.set('token', response.token, {
+            expires: 1, // days
+            secure: true,
+            sameSite: 'None',
+        });
 
         return responseData
     } catch (error) {
