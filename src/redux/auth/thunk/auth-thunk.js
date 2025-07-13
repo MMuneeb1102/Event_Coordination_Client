@@ -49,7 +49,8 @@ export const signin = createAsyncThunk("auth/signin", async (data, { rejectWithV
         Cookies.set('token', response.token, {
             expires: 1, // days
             secure: true,
-            sameSite: ' none',
+            sameSite: 'none',
+            httpOnly: false
         });
 
         return responseData
