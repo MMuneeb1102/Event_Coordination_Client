@@ -9,7 +9,7 @@ export const signup = createAsyncThunk("auth/signup", async (data, { rejectWithV
             headers: {
                 'Content-Type': 'application/json'
             }, 
-            // credentials: 'include',
+            credentials: 'include',
             body: JSON.stringify(data)
         })
 
@@ -37,7 +37,7 @@ export const signin = createAsyncThunk("auth/signin", async (data, { rejectWithV
             headers: {
                 'Content-Type': 'application/json'
             }, 
-            // credentials: 'include',
+            credentials: 'include',
             body: JSON.stringify(data)
         })
 
