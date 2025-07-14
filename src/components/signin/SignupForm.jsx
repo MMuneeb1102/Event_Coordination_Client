@@ -5,8 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { updateSignupConfirmPassword, updateSignupEmail, updateSignupName, updateSignupPassword, resetSignupState } from '../../redux/auth/slice/auth-slice';
 import FormLoader from '../loaders/FormLoader';
 import { signup } from '../../redux/auth/thunk/auth-thunk';
-
+import { useAuth } from '../../context/AuthContext';
 const SignupForm = () => {
+    const { setIsLoggedIn } = useAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { name, email, password, confirmPassword, isLoading } = useSelector((state) => state.signup)
@@ -25,28 +26,30 @@ const SignupForm = () => {
         dispatch(updateSignupConfirmPassword(e.target.value))
     }
 
-        const submitSignupForm = async (e) => {
-            e.preventDefault();
+    const submitSignupForm = async (e) => {
+        e.preventDefault();
 
-            const data = {
-                name,
-                email,
-                password,
-                confirmPassword
-            };
+        const data = {
+            name,
+            email,
+            password,
+            confirmPassword
+        };
 
-            try {
-                const result = await dispatch(signup(data)).unwrap();
-                
+        try {
+            const result = await dispatch(signup(data));
+
+            if (result.type === "auth/signup/fulfilled") {
+                setIsLoggedIn(true);
                 console.log('Signup Success:', result);
-
                 dispatch(resetSignupState());
 
                 navigate('/');
-            } catch (error) {
-                console.error('Signup Failed:', error);
             }
-        };
+        } catch (error) {
+            console.error('Signup Failed:', error);
+        }
+    };
 
     return (
         <SigninLayout heading="Sign Up">

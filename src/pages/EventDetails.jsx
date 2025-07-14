@@ -87,6 +87,7 @@ const EventDetails = () => {
                         Post
                     </button>
                 </form>
+                    {isLoading && <FormLoader/> }
             </div>
         </div>
     );

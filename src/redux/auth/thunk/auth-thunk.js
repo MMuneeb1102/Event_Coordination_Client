@@ -1,7 +1,9 @@
 import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
 import Cookies from 'js-cookie';
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+
 export const signup = createAsyncThunk("auth/signup", async (data, { rejectWithValue })=>{
+    
     try {
         const response = await fetch(`${apiUrl}/auth/signup`, {
             method: 'POST',
@@ -29,7 +31,6 @@ export const signup = createAsyncThunk("auth/signup", async (data, { rejectWithV
 })
 
 export const signin = createAsyncThunk("auth/signin", async (data, { rejectWithValue })=>{
-    
     try {
         const response = await fetch(`${apiUrl}/auth/signin`, {
             method: 'POST',
@@ -45,6 +46,7 @@ export const signin = createAsyncThunk("auth/signin", async (data, { rejectWithV
         if(!response.ok){
             return rejectWithValue(responseData?.message || "Signin failed");
         }
+        
 
         if (responseData.token) {
             console.log("getting token")

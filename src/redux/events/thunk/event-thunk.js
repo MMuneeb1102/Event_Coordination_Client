@@ -8,6 +8,7 @@ export const createEvent = createAsyncThunk(
   'event/createEvent',
   async (eventData, thunkAPI) => {
     try {
+      const token = await cookies.get('token')
       const response = await axios.post(`${apiUrl}/event/create-event`, eventData, {
         withCredentials: true, // send cookies if needed
         headers: {
@@ -44,7 +45,7 @@ export const getEventById = createAsyncThunk(
   'event/getEventById',
   async (eventId, thunkAPI) => {
     try {
-        const token = Cookies.get('token')
+        const token = await cookies.get('token')
       const response = await axios.get(`${apiUrl}/event/get-event/${eventId}`, {
         withCredentials: true,
         headers: {

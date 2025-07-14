@@ -1,13 +1,18 @@
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { Button, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import profileImg from "../../assets/user.png";
 import { Link } from "react-router-dom";
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
+import Cookies from 'universal-cookie'
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAuth } from "../../context/AuthContext"
+
 const ProfileDropDown = () => {
+  const cookies = new Cookies()
+  const { setIsLoggedIn } = useAuth();
 const navigate = useNavigate()
-  const logout = ()=>{
-    Cookies.remove('token')
+  const logout = async ()=>{
+    cookies.remove('token')
+    setIsLoggedIn(false)
     navigate('/')
   }
   return (
@@ -28,13 +33,12 @@ const navigate = useNavigate()
         className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
       >
         <MenuItem>
-          <Link
-          to='/'
+          <Button
             className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
             onClick={logout}
           >
             Sign out
-          </Link>
+          </Button>
         </MenuItem>
       </MenuItems>
     </Menu>

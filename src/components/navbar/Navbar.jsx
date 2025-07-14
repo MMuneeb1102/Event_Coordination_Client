@@ -13,17 +13,20 @@ import CustomButton from "../buttons/CustomButton";
 import LoginButton from "../buttons/LoginButton";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const { isLoggedIn } = useAuth();
   const [token, setToken] = useState(null);
   const navigate = useNavigate()
   useEffect(() => {
     const t = Cookies.get('token');
     setToken(t);
+    console.log(isLoggedIn)
   }, []);
 
   const handleNav = () =>{
@@ -34,7 +37,7 @@ export default function Navbar() {
     { name: "Home", href: "/", current: true },
     { name: "About", href: "#", current: false },
     { name: "Contact us", href: "#", current: false },
-    ...(token ? [{ name: "Events", href: "/events", current: false }] : []),
+    ...(isLoggedIn || token ? [{ name: "Events", href: "/events", current: false }] : []),
   ];
   return (
     <Disclosure
@@ -67,7 +70,7 @@ export default function Navbar() {
 
             <NavItems navigation={navigation} classNames={classNames} />
           </div>
-          {token ? <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          {isLoggedIn || token ? <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button
               style={{ background: 'none' }}
               type="button"
