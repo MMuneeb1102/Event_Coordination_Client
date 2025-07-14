@@ -63,26 +63,26 @@ export default function FormDialog({ open, setOpen }) {
                 <DialogContent sx={{ paddingBottom: 0 }}>
 
                     <form className='row g-3' onSubmit={handleSubmit}>
-                        <div class="col-md-6">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" name='title' value={title} onChange={handleChange}/>
+                        <div className="col-md-6">
+                            <label for="title" className="form-label">Title</label>
+                            <input required type="text" className="form-control" id="title" name='title' value={title} onChange={handleChange}/>
                         </div>
-                        <div class="col-md-6">
-                            <label for="location" class="form-label">Location</label>
-                            <input type="text" class="form-control" id="location" name='location' value={location} onChange={handleChange}/>
+                        <div className="col-md-6">
+                            <label for="location" className="form-label">Location</label>
+                            <input required type="text" className="form-control" id="location" name='location' value={location} onChange={handleChange}/>
                         </div>
-                        <div class="col-md-6">
-                            <label for="event-date" class="form-label">Date</label>
-                            <input type="date" id="event-date" name="date" className='form-control' value={date} onChange={handleChange}/>
+                        <div className="col-md-6">
+                            <label for="event-date" className="form-label">Date</label>
+                            <input required type="date" id="event-date" name="date" className='form-control' value={date} onChange={handleChange}/>
                         </div>
-                        <div class="col-md-6">
-                            <label for="time" class="form-label">Time</label>
-                            <input type="time" id="time" name="time" className='form-control' value={time} onChange={handleChange}/>
+                        <div className="col-md-6">
+                            <label for="time" className="form-label">Time</label>
+                            <input required type="time" id="time" name="time" className='form-control' value={time} onChange={handleChange}/>
                         </div>
 
-                        <div class="col-12">
-                            <label for="Description" class="form-label">Description</label>
-                            <textarea class="form-control" name='description' id='Description' aria-label="With textarea" onChange={handleChange} value={description}></textarea>
+                        <div className="col-12">
+                            <label for="Description" className="form-label">Description</label>
+                            <textarea className="form-control" name='description' id='Description' aria-label="With textarea" onChange={handleChange} value={description}></textarea>
                         </div>
 
                         <DialogActions>

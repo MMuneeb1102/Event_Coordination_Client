@@ -56,8 +56,8 @@ const SignupForm = () => {
             <form onSubmit={submitSignupForm} className="form">
                 <input required className="input" type="text" name="name" id="name" placeholder="Name" value={name} onChange={handleNameOnChange} />
                 <input required className="input" type="email" name="email" id="email" placeholder="E-mail" value={email} onChange={handleEmailOnChange} />
-                <input required className="input" type="password" name="password" id="password" placeholder="Password" value={password} onChange={handlePasswordOnChange} />
-                <input required className="input" type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" value={confirmPassword} onChange={handleConfirmPasswordOnChange} />
+                <input required minLength={8} className="input" type="password" name="password" id="password" placeholder="Password" value={password} onChange={handlePasswordOnChange} />
+                <input required minLength={8} className="input" type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" value={confirmPassword} onChange={handleConfirmPasswordOnChange} />
                 <span className="forgot-password"><Link to={"/signin"}>Already have an account?</Link></span>
                 <input className="login-button" type="submit" value="Sign Up" />
                 {isLoading && <FormLoader />}

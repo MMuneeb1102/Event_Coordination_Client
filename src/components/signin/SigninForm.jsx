@@ -7,46 +7,47 @@ import { updateSigninEmail, updateSigninPassword, resetSigninState } from '../..
 import { signin } from '../../redux/auth/thunk/auth-thunk';
 import { useAuth } from '../../context/AuthContext';
 const SigninForm = () => {
-   const { setIsLoggedIn } = useAuth();
+    const { setIsLoggedIn } = useAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { email, password, isLoading } = useSelector((state) => state.signin)
-
+    
     const handleEmailOnChange = (e) => {
         dispatch(updateSigninEmail(e.target.value))
     }
     const handlePasswordOnChange = (e) => {
         dispatch(updateSigninPassword(e.target.value))
     }
-
+    
     const submitSigninForm = async (e) => {
         e.preventDefault();
-
+        
         const data = {
             email,
             password
         };
-
+        
         try {
             const result = await dispatch(signin(data))
-
+            
             if (result.type === "auth/signin/fulfilled") {
                 setIsLoggedIn(true);
                 console.log('Signin Success:', result);
-    
+                
                 dispatch(resetSigninState());
                 navigate('/');
             }
-
+            
         } catch (error) {
+            
             console.error('Signup Failed:', error);
         }
     };
     return (
         <SigninLayout heading="Sign In">
             <form onSubmit={submitSigninForm} className="form">
-                <input required="" className="input" type="email" name="email" id="email" placeholder="E-mail" value={email} onChange={handleEmailOnChange} />
-                <input required="" className="input" type="password" name="password" id="password" placeholder="Password" value={password} onChange={handlePasswordOnChange} />
+                <input required className="input" type="email" name="email" id="email" placeholder="E-mail" value={email} onChange={handleEmailOnChange} />
+                <input required minLength={8} className="input" type="password" name="password" id="password" placeholder="Password" value={password} onChange={handlePasswordOnChange} />
                 <span className="forgot-password"><a href="#">Forgot Password ?</a></span>
                 <input className="login-button" type="submit" value="Sign In" />
                 {isLoading && <FormLoader />}
