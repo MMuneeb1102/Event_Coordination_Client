@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import Cookies from 'universal-cookie';
 // Async thunk for creating an event
+const cookies = new Cookies();
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
-const token = Cookies.get('token')
 export const createEvent = createAsyncThunk(
   'event/createEvent',
   async (eventData, thunkAPI) => {
@@ -11,7 +11,7 @@ export const createEvent = createAsyncThunk(
       const response = await axios.post(`${apiUrl}/event/create-event`, eventData, {
         withCredentials: true, // send cookies if needed
         headers: {
-            'authorization': `Bearer ${token}`
+          'authorization': `Bearer ${token}`
         }
       });
       return response.data;
@@ -25,7 +25,8 @@ export const getAllEvents = createAsyncThunk(
   'event/getAllEvents',
   async (_, thunkAPI) => {
     try {
-        const token = Cookies.get('token')
+      const token = await cookies.get('token')
+      console.log(token)
       const response = await axios.get(`${apiUrl}/event/getall`, {
         withCredentials: true,
         headers: {
