@@ -1,54 +1,63 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import Cookies from 'js-cookie'
+import Cookies from "universal-cookie";
 import axios from "axios";
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
-
-const token = Cookies.get('token');
+const cookies = new Cookies();
 export const createComment = createAsyncThunk(
-  'comment/create',
+  "comment/create",
   async ({ eventId, comment }, { rejectWithValue }) => {
     try {
-      console.log(comment)
+      const token = await cookies.get("token");
+      console.log(comment);
       const response = await axios.post(
         `${apiUrl}/event/add-comment/${eventId}`,
-        {comment: comment},
+        { comment: comment },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      console.log(response)
+      console.log(response);
 
       return response.data;
     } catch (err) {
       const errorMessage =
-        err.response?.data?.message || err.message || 'Network error';
+        err.response?.data?.message || err.message || "Network error";
       return rejectWithValue(errorMessage);
     }
   }
 );
 
 export const getAllCommentsByEventId = createAsyncThunk(
-  'comment/getAllbyId',
+  "comment/getAllbyId",
   async (eventId, { rejectWithValue }) => {
-    // console.log(eventId)
     try {
-      const response = await axios.get(`${apiUrl}/event/comments/getall/${eventId}`,
+      const token = await cookies.get("token"); // if you're using cookies to get token
+
+      const response = await fetch(
+        `${apiUrl}/event/comments/getall/${eventId}`,
         {
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          credentials: "include", // if your backend requires cookies
         }
       );
-      return response.data; 
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to fetch comments");
+      }
+
+      const data = await response.json();
+      return data;
     } catch (err) {
-      const errorMessage =
-        err.response?.data?.message || err.message || 'Failed to fetch comments';
-      return rejectWithValue(errorMessage);
+      return rejectWithValue(err.message || "Failed to fetch comments");
     }
   }
 );

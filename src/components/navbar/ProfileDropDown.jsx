@@ -1,31 +1,39 @@
-import { Button, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
 import profileImg from "../../assets/user.png";
 import { Link } from "react-router-dom";
 // import Cookies from 'js-cookie'
-import Cookies from 'universal-cookie'
+import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"
+import { useAuth } from "../../context/AuthContext";
+import { useSelector, useDispatch } from "react-redux";
+import { removeToken, setToken } from "../../redux/auth/slice/auth-slice";
 
 const ProfileDropDown = () => {
-  const cookies = new Cookies()
+  const dispatch = useDispatch();
+  const cookies = new Cookies();
   const { setIsLoggedIn } = useAuth();
-const navigate = useNavigate()
-  const logout = async ()=>{
-    cookies.remove('token')
-    setIsLoggedIn(false)
-    navigate('/')
-  }
+  const { token } = useSelector((state) => state.token);
+
+  const navigate = useNavigate();
+  const logout = async () => {
+    cookies.remove("token");
+    setIsLoggedIn(false);
+    dispatch(removeToken());
+    navigate("/");
+  };
   return (
     <Menu as="div" className="relative ml-3">
       <div>
         <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800">
           <span className="absolute -inset-1.5" />
           <span className="sr-only">Open user menu</span>
-          <img
-            alt=""
-            src={profileImg}
-            className="size-8 rounded-full"
-          />
+          <img alt="" src={profileImg} className="size-8 rounded-full" />
         </MenuButton>
       </div>
       <MenuItems
